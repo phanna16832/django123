@@ -44,10 +44,9 @@ input[type="number"] {
 
 /* Buttons */
 button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  color: white;
+  background-color: gold;
+  border-radius: 8px;
 }
 
 footer {
