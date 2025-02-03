@@ -32,3 +32,7 @@ def logout_view(request):
 @login_required(login_url="login")
 def home_view(request):
     return render(request, "home.html")
+
+@login_required(login_url='login')
+def test(request):
+    return render(request, "test.html")

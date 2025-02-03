@@ -200,14 +200,15 @@ btn.addEventListener('click',()=>{
    មិនធានាទៅលើឥវ៉ាន់ដែលបែកបាក់នោះទេ\
   \n ចំពោះសេវាជួយទិញតាមតេលេក្រាមពុំមានការបង្រួមកញ្ចប់ទំនិញចូលគ្នាទេបង។
 `
-if (!result0.value || !result.value) {
-  compare.innerText = "សូមបញ្ចូលតម្លៃ";
-} else if (result0.valueAsNumber !== result.valueAsNumber) {
+  result.className = 'tag is-success is-light is-size-4'
+  if (result0.valueAsNumber !== result.valueAsNumber) {
   compare.innerText = `${result0.valueAsNumber} អត់ស្មើ ${result.valueAsNumber}`;
 } else {
   compare.innerText = `${result0.valueAsNumber} ស្មើ ${result.valueAsNumber}`;
+  compare.className = 'tag is-success is-light is-size-4'
 }
 });
+
 
 //copyText
 function copyText(id) {
