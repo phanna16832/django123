@@ -1,105 +1,109 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Price Calculator</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="{% static 'style.css' %}" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hanuman:wght@300;400;700&display=swap" rel="stylesheet">
-  </head>
-  <body class="has-background-light">
 
-    <nav class="navbar is-dark">
-      <div class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item has-text-white" href="{% url 'home' %}">Home</a>
-          <a class="navbar-item has-text-white" href="{% url 'logout' %}">Logout</a>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Price Calculator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="{% static 'style.css' %}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanuman:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="has-background-light">
+
+  <nav class="navbar is-dark">
+    <div class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item has-text-white" href="{% url 'home' %}">Home</a>
+        <a class="navbar-item has-text-white" href="{% url 'save_rp' %}">save rp</a>
+        <a class="navbar-item has-text-white" href="{% url 'logout' %}">Logout</a>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <section class="section">
-      <div class="container">
-        <header id="greeting" class="title has-text-danger"></header>
-        <h1 class="title is-3 has-text-danger">
-          សូមស្វាគមន៍ {{ request.user.username }}
-        </h1>
+  <section class="section">
+    <div class="container">
+      <header id="greeting" class="title has-text-danger"></header>
+      <h1 class="title is-3 has-text-danger">
+        សូមស្វាគមន៍ {{ request.user.username }}
+      </h1>
 
-        <div class="table-container">
-          <table class="table is-fullwidth is-striped is-hoverable">
-            <caption class="title is-5">គណនាតម្លៃ</caption>
-            <thead>
-              <tr>
-                <th>តម្លៃទំនិញនៅក្នុងអេបជា (￥)</th>
-                <th>តម្លៃទំនិញជា ($)</th>
-                <th>អាត្រាប្តូរប្រាក់</th>
-                <th>តម្លៃទំនិញក្នុងអេបជា ($)</th>
-                <th>តម្លៃទំនិញដែលត្រូវកែជា ($)</th>
-              </tr>
-            </thead>
-            <tbody id="tbody">
-              <tr>
-                <td><input class="input" type="number" id="inputPrice1" placeholder="កំណត់តម្លៃ" /></td>
-                <td><input class="input" type="number" id="inputPrice2" placeholder="បញ្ចូលតម្លៃទំនិញនៅក្នុងអេប" /></td>
-                <td><span id="rate" class="has-text-danger"></span></td>
-                <td><span id="convertPriceText" class="has-text-info"></span></td>
-                <td><span id="changePriceText" class="has-text-warning"></span></td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="2"><button class="button is-primary" id="btn1">គណនា</button></td>
-                <td colspan="2"><button class="button is-link" id="btn2">ចម្លងតម្លៃទំនិញ</button></td>
-                <td><button class="button is-success" id="btn3">ចម្លងតម្លៃដែលត្រូវកែ</button></td>
-              </tr>
-            </tfoot>
-          </table>
+      <div class="table-container">
+        <table class="table is-fullwidth is-striped is-hoverable">
+          <caption class="title is-5">គណនាតម្លៃ</caption>
+          <thead>
+            <tr>
+              <th>តម្លៃទំនិញនៅក្នុងអេបជា (￥)</th>
+              <th>តម្លៃទំនិញជា ($)</th>
+              <th>អាត្រាប្តូរប្រាក់</th>
+              <th>តម្លៃទំនិញក្នុងអេបជា ($)</th>
+              <th>តម្លៃទំនិញដែលត្រូវកែជា ($)</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr>
+              <td><input class="input" type="number" id="inputPrice1" placeholder="កំណត់តម្លៃ" /></td>
+              <td><input class="input" type="number" id="inputPrice2" placeholder="បញ្ចូលតម្លៃទំនិញនៅក្នុងអេប" /></td>
+              <td><span id="rate" class="has-text-danger"></span></td>
+              <td><span id="convertPriceText" class="has-text-info"></span></td>
+              <td><span id="changePriceText" class="has-text-warning"></span></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2"><button class="button is-primary" id="btn1">គណនា</button></td>
+              <td colspan="2"><button class="button is-link" id="btn2">ចម្លងតម្លៃទំនិញ</button></td>
+              <td><button class="button is-success" id="btn3">ចម្លងតម្លៃដែលត្រូវកែ</button></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="box">
+        <div class="field">
+          <label class="label">កំណត់ តម្លៃ</label>
+          <div class="control">
+            <input class="input" type="number" id="input" placeholder="កំណត់ តម្លៃ">
+          </div>
         </div>
 
-        <div class="box">
-          <div class="field">
-            <label class="label">កំណត់ តម្លៃ</label>
-            <div class="control">
-              <input class="input" type="number" id="input" placeholder="កំណត់ តម្លៃ">
+        <div class="field">
+          <label class="label">អាត្រាប្តូរប្រាក់</label>
+          <div class="control">
+            <div class="select">
+              <select id="Erate">
+                <option value="6" selected>6</option>
+                <option value="6.1">6.1</option>
+                <option value="6.2">6.2</option>
+                <option value="6.3">6.3</option>
+                <option value="6.4">6.4</option>
+                <option value="6.5">6.5</option>
+              </select>
             </div>
           </div>
-
-          <div class="field">
-            <label class="label">អាត្រាប្តូរប្រាក់</label>
-            <div class="control">
-              <div class="select">
-                <select id="Erate">
-                  <option value="6" selected>6</option>
-                  <option value="6.1">6.1</option>
-                  <option value="6.2">6.2</option>
-                  <option value="6.3">6.3</option>
-                  <option value="6.4">6.4</option>
-                  <option value="6.5">6.5</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <p class="has-text-weight-bold" id="result"></p>
-          <p id="compare"></p>
-
-          <button class="button is-primary" id="btn">គណនា</button>
-          <button class="button is-warning" onclick="copyText('result')">ចម្លង</button>
         </div>
-      </div>
-    </section>
 
-    <footer class="footer has-background-dark has-text-white">
-      <div class="content has-text-centered">
-        <h4>Website នេះបានបង្កើតឡើងក្នុងគោលបំណងហ្វឹកហាត់ការសរសេរកូដ</h4>
-        <p>ភាសាកូដ ដែលត្រូវបានប្រើ <span class="has-text-warning">JavaScript + Django</span></p>
-      </div>
-    </footer>
+        <p class="has-text-weight-bold" id="result"></p>
+        <p id="compare"></p>
 
-    <script src="{% static 'script.js' %}"></script>
-  </body>
+        <button class="button is-primary" id="btn">គណនា</button>
+        <button class="button is-warning" onclick="copyText('result')">ចម្លង</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer has-background-dark has-text-white">
+    <div class="content has-text-centered">
+      <h4>Website នេះបានបង្កើតឡើងក្នុងគោលបំណងហ្វឹកហាត់ការសរសេរកូដ</h4>
+      <p>ភាសាកូដ ដែលត្រូវបានប្រើ <span class="has-text-warning">JavaScript + Django</span></p>
+    </div>
+  </footer>
+
+  <script src="{% static 'script.js' %}"></script>
+</body>
+
 </html>

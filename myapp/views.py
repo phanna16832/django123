@@ -36,3 +36,7 @@ def home_view(request):
 @login_required(login_url='login')
 def test(request):
     return render(request, "test.html")
+
+@login_required(login_url='login')
+def save_rp(request):
+    return render(request, "saveReply.html")
