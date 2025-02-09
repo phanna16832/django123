@@ -180,33 +180,38 @@ btn3.addEventListener("click", () => {
   }
 });
 
-//subtotal calculator 
+// Subtotal calculator 
 const btn = document.getElementById("btn");
-const compare = document.getElementById("compare");
-const result0 = document.createElement("span");
 const result = document.querySelector("#result");
-result.parentNode.insertBefore(result0, result);
+
+// Create a new result0 element
+const result0 = document.createElement("div");
 result0.className = "result0";
 
-btn.addEventListener('click',()=>{
-  const Erate =parseFloat( document.getElementById("Erate").value ||0);
-  const input = parseFloat(document.getElementById("input").value||0);
-  const price = (input/Erate).toFixed(4);
-  const price1 = (input/Erate).toFixed(2)
-  result0.innerText = price
-  result.innerText = `សួស្តីបង សរុបហាងទំនិញទាំងអស់ $${price1} \n	
+// Insert result0 before result
+result.parentNode.insertBefore(result0, result);
+
+btn.addEventListener('click', () => {
+    const Erate = parseFloat(document.getElementById("Erate").value || 0);
+    const input = parseFloat(document.getElementById("input").value || 0);
+
+    if (Erate === 0) {
+        result0.innerText = "Error: Exchange rate cannot be zero.";
+        result0.style.color = "red";
+        return;
+    }
+
+    const price = (input / Erate).toFixed(4);
+    const price1 = (input / Erate).toFixed(2);
+
+    result0.innerText = price;
+    result.innerText = `សួស្តីបង សរុបហាងទំនិញទាំងអស់ $${price1} \n	
   \n\n***បញ្ជាក់: ចំពោះទំនិញទិញក្នុងហាងតែមួយ ប្រសិនខាងហាងបំបែកកញ្ចប់ទំនិញ ខាងប្អូននឹងរាប់កញ្ចប់ទំនិញគិតថ្លៃដឹកតាមចំនួនកញ្ចប់ទំនិញដូចគ្នា
    \សំរាប់កញ្ចប់ដែលក្រោម1គីឡូ ខាងប្អូនគិតមួយគីឡូ លើស1គីឡូយក ទំហំនិង ទម្ងង់ប្រៀបធៀបគ្នាមួយណាធំជាងយកមួយនឹងជាគោលគិតថ្លៃដឹកជញ្ចូន។​​ ម្យ៉ាងវិញទៀតខាងប្អូនធានាទៅលើតែឥវ៉ាន់ដែលបាត់បង់ \
    មិនធានាទៅលើឥវ៉ាន់ដែលបែកបាក់នោះទេ\
-  \n ចំពោះសេវាជួយទិញតាមតេលេក្រាមពុំមានការបង្រួមកញ្ចប់ទំនិញចូលគ្នាទេបង។
-`
-  result.className = 'tag is-success is-light is-size-4'
-  if (result0.valueAsNumber !== result.valueAsNumber) {
-  compare.innerText = `${result0.valueAsNumber} អត់ស្មើ ${result.valueAsNumber}`;
-} else {
-  compare.innerText = `${result0.valueAsNumber} ស្មើ ${result.valueAsNumber}`;
-  compare.className = 'tag is-success is-light is-size-4'
-}
+  \n ចំពោះសេវាជួយទិញតាមតេលេក្រាមពុំមានការបង្រួមកញ្ចប់ទំនិញចូលគ្នាទេបង។`;
+
+    result.className = 'tag is-success is-light is-size-4';
 });
 
 

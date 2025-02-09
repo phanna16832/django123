@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm
+from datetime import datetime  # Import datetime module
 
 def login_view(request):
     if request.user.is_authenticated:  # Check if user is already logged in
@@ -31,7 +32,11 @@ def logout_view(request):
 
 @login_required(login_url="login")
 def home_view(request):
-    return render(request, "home.html")
+    dateNow = datetime.today().date()  # Get the current date
+    context = {
+        "date": dateNow  # Use a string key
+    }    
+    return render(request, "home.html",context)
 
 @login_required(login_url='login')
 def test(request):
