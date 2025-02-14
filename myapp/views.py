@@ -2,46 +2,39 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm
-from datetime import datetime  # Import datetime module
+from datetime import datetime
 
 def login_view(request):
-    if request.user.is_authenticated:  # Check if user is already logged in
-        return redirect("home")  # Redirect to home page if logged in
+    if request.user.is_authenticated:
+        return redirect("home")
 
-    form = LoginForm()
+    form = LoginForm(request.POST or None)
     error_message = ""
 
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
-
-            if user is not None:
-                login(request, user)
-                return redirect("home")  # Redirect to home page after login
-            else:
-                error_message = "Invalid username or password."
+    if request.method == "POST" and form.is_valid():
+        user = authenticate(
+            request, 
+            username=form.cleaned_data['username'], 
+            password=form.cleaned_data['password']
+        )
+        if user:
+            login(request, user)
+            return redirect("home")
+        error_message = "Invalid username or password."
 
     return render(request, "login.html", {"form": form, "error_message": error_message})
 
 def logout_view(request):
-    logout(request)
-    return redirect("login")  # Redirect to login page after logout
+    return redirect("login")
 
 @login_required(login_url="login")
 def home_view(request):
-    dateNow = datetime.today().date()  # Get the current date
-    context = {
-        "date": dateNow  # Use a string key
-    }    
-    return render(request, "home.html",context)
+    return render(request, "home.html", {"date": datetime.now().date()})
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 def test(request):
     return render(request, "test.html")
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 def save_rp(request):
     return render(request, "saveReply.html")

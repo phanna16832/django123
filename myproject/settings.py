@@ -7,10 +7,9 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Security settings
 SECRET_KEY = os.getenv('SECRET_KEY', 'your-default-secret-key')
-
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
-
 ALLOWED_HOSTS = ['saverp-dj.up.railway.app', '127.0.0.1', 'localhost']
 CSRF_TRUSTED_ORIGINS = [
     'https://saverp-dj.up.railway.app',
@@ -18,6 +17,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000'
 ]
 
+# Installed apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'myapp'
 ]
 
+# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -39,8 +40,10 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+# URL configuration
 ROOT_URLCONF = 'myproject.urls'
 
+# Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -57,8 +60,10 @@ TEMPLATES = [
     },
 ]
 
+# WSGI application
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
+# Database configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -70,6 +75,7 @@ DATABASES = {
     }
 }
 
+# Authentication password validators
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -77,12 +83,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+# Localization settings
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files
+# Static files settings
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -92,4 +99,5 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 if os.path.exists(STATIC_DIR):
     STATICFILES_DIRS = [STATIC_DIR]
 
+# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
