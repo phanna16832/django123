@@ -1,90 +1,22 @@
-//time & greeting function
-const greeting = document.querySelector("#greeting");
-greeting.style.color = "#ff0000"; // Yellow text color
-
-function updateGreeting() {
-    const now = new Date();
-    const hour = now.getHours();
-    const minutes = now.getMinutes().toString().padStart(2, "0"); // Ensures two digits for minutes
-    const seconds = now.getSeconds().toString().padStart(2, "0"); // Ensures two digits for seconds
-
-    // Determine the greeting message
-    if (hour >= 5 && hour < 12) {
-        greeting.innerText = "អារុណសួស្តី!";
-    } else if (hour >= 12 && hour < 17) {
-        greeting.innerText = "ទិវាសួស្តី!";
-    } else if (hour >= 17 && hour < 21) {
-        greeting.innerText =" សាយណ្ណសួស្តី!";
-    } else {
-        greeting.innerText = "រាត្រីសួស្តី!";
-    }
-
-    // Create or update the time display
-    let time = document.querySelector("#current-time");
-    if (!time) {
-        time = document.createElement("span");
-        time.id = "current-time"; // Add an ID for easy access
-        greeting.appendChild(document.createElement("br")); // Line break for readability
-        greeting.appendChild(time);
-    }
-    time.innerText = `${hour}:${minutes}:${seconds}`;
-    time.style.color = "rgb(255, 215, 0)"; // Yellow text color
-}
-
-// Update the greeting and time immediately
-updateGreeting();
-
-// Update the greeting and time every second
-setInterval(updateGreeting, 1000);
-
-
-//calculate change price
-//declear rate
-const rate = document.querySelector("#rate");
-rate.innerHTML = 6.1;
-rate.style.color = "#ff0000";
-
-//declear btn
-// Select all inputs and the button
-const inputs = document.querySelectorAll("input");
+const inputPrice1 = document.getElementById("inputPrice1");
+const inputPrice2 = document.getElementById("inputPrice2");
+const rate = document.getElementById("rate");
+const convertPriceText = document.getElementById("convertPriceText");
+const changePriceText = document.getElementById("changePriceText");
 const btn1 = document.getElementById("btn1");
+const btn2 = document.getElementById("btn2");
 
-// Functionality for btn1 click
-btn1.addEventListener("click", () => {
-  const inputPrice1 = parseFloat(
-    document.getElementById("inputPrice1").value || 0
-  );
-  const inputPrice2 = parseFloat(
-    document.getElementById("inputPrice2").value || 0
-  );
-  const rate = parseFloat(document.querySelector("#rate").innerText || 1); // Default rate if empty
-
-  const convertPrice = (inputPrice1 / rate).toFixed(2);
-  const convertPriceText = document.querySelector("#convertPriceText");
-  convertPriceText.innerText = convertPrice;
-
-  const changePriceText = document.querySelector("#changePriceText");
-  const changePrice = (convertPrice - inputPrice2).toFixed(2);
-
-  changePrice > 0
-    ? (changePriceText.style.color = "#FFD700")
-    : (changePriceText.style.color = "#FF0000");
-  changePriceText.innerText = changePrice;
+btn1.addEventListener("click", function () {
+  const price1 = parseFloat(inputPrice1.value) || 0;
+  const price2 = parseFloat(inputPrice2.value) || 0;
+  setRate =6.1;
+  rate.innerText = setRate;
+  calPrice = (price1 /setRate).toFixed(2);
+  newPrice = (calPrice-price2).toFixed(2);
+  changePriceText.className = newPrice > 0 ? "text-danger" : "text-sucess";
+  convertPriceText.innerHTML = calPrice;
+  changePriceText.innerHTML = newPrice;
 });
-
-// Clear inputs and results when Escape or Delete key is pressed
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" || e.key === "Delete") {
-    // Clear all input fields
-    document.getElementById("inputPrice1").value = "";
-    document.getElementById("inputPrice2").value = "";
-
-    // Clear displayed results
-    document.querySelector("#convertPriceText").innerText = "";
-    document.querySelector("#changePriceText").innerText = "";
-  }
-});
-
 
 
 //copyPaste
@@ -133,8 +65,6 @@ btn2.addEventListener("click", () => {
   }
 });
 
-
-
 btn3.addEventListener("click", () => {
   if (convertPriceText) {
     // Create the notification div element
@@ -179,6 +109,7 @@ btn3.addEventListener("click", () => {
     console.error("Element with id 'convertPriceText' not found.");
   }
 });
+
 
 // Subtotal calculator 
 const btn = document.getElementById("btn");
@@ -244,62 +175,3 @@ function copyText(id) {
       })
       .catch(err => console.error('Failed to copy:', err));
 }
-
-
-
-
-
-// Get footer element and create an element for the date and time
-const footer = document.querySelector("footer");
-const dateFormat = document.createElement("h5");
-footer.appendChild(dateFormat);
-
-// Function to update time and date
-function updateTime() {
-  const now = new Date();
-  const hour = now.getHours();
-  const minutes = now.getMinutes().toString().padStart(2, "0");
-  const seconds = now.getSeconds().toString().padStart(2, "0");
-
-  // Create or update the time span
-  let time = document.querySelector("#current-time");
-  if (!time) {
-    time = document.createElement("span");
-    time.id = "current-time"; // Add an ID for easy access
-    dateFormat.appendChild(document.createElement("br")); // Line break for readability
-    dateFormat.appendChild(time); // Append to the dateFormat element
-  }
-  time.innerText = `${hour}:${minutes}:${seconds}`;
-  time.style.color = "rgb(255, 215, 0)"; // Yellow text color
-
-  // Get current date in a specific format (e.g., "Wed, Jan 1, 2025")
-  const date = new Date().toLocaleDateString('en-US', {
-    weekday: 'short',
-    year: 'numeric', 
-    month: 'short',
-    day: 'numeric'
-  });
-
-  // Set date text and initial color
-  dateFormat.innerText = date + " " + time.innerText;
-  dateFormat.style.color = "rgb(255, 215, 0)"; // Default color
-
-  // Special handling for specific dates
-  if (date.toLowerCase().includes('jan 1, 2025')) {
-    console.log("Happy New Year");
-    dateFormat.style.color = "red"; // Change color for New Year
-  } else if (date.toLowerCase().includes('jan 29, 2025') ||
-             date.toLowerCase().includes('jan 30, 2025') ||
-             date.toLowerCase().includes('jan 31, 2025')) {
-    dateFormat.style.color = "rgb(255, 215, 0)"; // Yellow color for Chinese New Year
-    const dateCelebration = document.createElement("span");
-    dateCelebration.innerText = "Happy Chinese New Year 🎆🎆";
-    dateFormat.appendChild(dateCelebration); // Append the celebration message
-  }
-}
-
-// Update the time and date every second
-setInterval(updateTime, 1000);
-
-// Run once initially to display time without waiting for the interval
-updateTime();
