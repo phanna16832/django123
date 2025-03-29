@@ -25,7 +25,9 @@ def login_view(request):
     return render(request, "login.html", {"form": form, "error_message": error_message})
 
 def logout_view(request):
+    logout(request)  # This logs out the user
     return redirect("login")
+
 
 @login_required(login_url="login")
 def home_view(request):
