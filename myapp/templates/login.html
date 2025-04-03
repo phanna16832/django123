@@ -7,6 +7,8 @@
     <title>Login</title>
     <link rel="shortcut icon" href="{% static 'img/home-favicon.png' %}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+    <!-- icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
     <section class="hero is-fullheight">
@@ -25,14 +27,19 @@
                         <form method="post">
                             {% csrf_token %}
                             <div class="field">
-                                <label class="label">Username</label>
+                                <label class="label">
+                                    <i class="bi bi-person"></i>
+                                    Username
+                                </label>
                                 <div class="control">
                                     {{ form.username }}
                                 </div>
                             </div>
 
                             <div class="field">
-                                <label class="label">Password</label>
+                                <label class="label">
+                                    <i class="bi bi-lock"></i>Password
+                                </label>
                                 <div class="control">
                                     {{ form.password }}
                                 </div>
@@ -40,7 +47,10 @@
 
                             <div class="field">
                                 <div class="control">
-                                    <button class="button is-primary is-fullwidth">Login</button>
+                                    <button class="button is-primary is-fullwidth">
+                                        <i class="bi bi-box-arrow-in-right"></i>
+                                        Login
+                                    </button>
                                 </div>
                             </div>
                         </form>
