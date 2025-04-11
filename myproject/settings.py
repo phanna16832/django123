@@ -10,9 +10,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security settings
 SECRET_KEY = os.getenv('SECRET_KEY', 'your-default-secret-key')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = ['your-app-name.onrender.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['save-rp.onrender.com', '127.0.0.1', 'localhost']
 CSRF_TRUSTED_ORIGINS = [
-    'https://your-app-name.onrender.com',
+    'https://save-rp.onrender.com',
     'http://127.0.0.1:8000',
     'http://localhost:8000'
 ]
@@ -67,8 +67,9 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
+
 
 # Authentication password validators
 AUTH_PASSWORD_VALIDATORS = [
