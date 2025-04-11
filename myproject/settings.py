@@ -64,10 +64,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
 # Database configuration
+import os
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+    'default': dj_database_url.config(
+        default='sqlite:///db.sqlite3',  # fallback to SQLite
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 
